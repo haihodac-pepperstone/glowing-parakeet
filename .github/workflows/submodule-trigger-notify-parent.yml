@@ -1,0 +1,21 @@
+name: 'Submodule Trigger Notify Parent'
+
+on:
+  push:
+    branches:
+      - main    
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  notify:
+    name: 'Submodule Notify Parent'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatches
+        uses: perter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.CLONE_SUBMODULE }}
+          repository: haihodac-pepperstone/bookish-funicular
+          event-type: submodule-update
