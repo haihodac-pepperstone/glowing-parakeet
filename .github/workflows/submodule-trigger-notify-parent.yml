@@ -12,10 +12,15 @@ jobs:
   notify:
     name: 'Submodule Notify Parent'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ['haihodac-pepperstone/bookish-funicular']
     steps:
       - name: Repository Dispatches
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.CLONE_SUBMODULE }}
-          repository: haihodac-pepperstone/bookish-funicular
+          # repository: haihodac-pepperstone/bookish-funicular
+          repository: ${{ matrix.repo }}
           event-type: submodule-update
+          client-payload: '{"author": "${{ github.actor }}"}'
