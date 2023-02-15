@@ -1,4 +1,4 @@
-name: 'Submodule Trigger Notify Parent'
+name: 'Broadcast update'
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: Repository Dispatches
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.CLONE_SUBMODULE }}
+          token: ${{ secrets.BROADCAST_PAT }}
           # repository: haihodac-pepperstone/bookish-funicular
           repository: ${{ matrix.repo }}
           event-type: submodule-update
